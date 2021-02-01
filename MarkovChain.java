@@ -1,18 +1,22 @@
 import java.io.*;
 import java.util.*;
 
+
 public class MarkovChain {
     public static void main(String[] args)throws Exception
     {
         Scanner s = new Scanner(System.in);
         Random r = new Random();
 
-        System.out.println("Give me file name:");
+        System.out.println("Give me file name to read from:");
 
         File file = new File("C:\\Users\\kelly\\Desktop\\" + s.nextLine() + ".txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         Hashtable<String, ArrayList<String>> dict = new Hashtable<String, ArrayList<String>>();
+
+        System.out.println("Give me file name to write to:");
+        String writefile = s.nextLine();
 
         System.out.println("How many words u want:");
         int wordnum = s.nextInt();
@@ -70,6 +74,14 @@ public class MarkovChain {
                 }
                 response += " " + currentword;
             }
+        }
+
+        try{
+            FileWriter myWriter = new FileWriter(writefile + ".txt");
+            myWriter.write(response);
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         System.out.println(response);
